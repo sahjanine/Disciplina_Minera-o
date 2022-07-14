@@ -131,7 +131,7 @@ knitr::kable(Medidas, col.names = c("Risco","Erro padrão") , align = "c",digits
 
 ```
 
-O método dos k-vizinhos mais próximos, também conhecido como KNN, como explicado no livro do professor, possui como finalidade estimar a função de regressão $r(x)$ para uma
+O método dos k-vizinhos mais próximos, também conhecido como KNN, como explicado no livro Aprendizado de Máquina: Uma abordagem estatística do professor, possui como finalidade estimar a função de regressão $r(x)$ para uma
 dada configuração das covariáveis $x$ com base nas respostas $Y$ dos $k$-vizinhos mais
 próximos a $x$.
 
@@ -209,11 +209,11 @@ ggarrange(graf_neg,graf_pos,ncol = 2,nrow = 1)
 
 ```
 
-Na Figura acima, temos os coeficientes relacionados as palavras que mais se destacam positivamente (à direita) e negativamente (à esquerda). Analisando as estimativas dos coeficientes positivos, as 6 palavras mais relevantes para explicação da nota do filme foram:  *village, despite, war, french, friendship e falls*. Os 6 maiores coeficientes negativos, por sua vez, são referentes as palavras: *plot, evil, dangerous, deadly, movie e dark*. 
+Na Figura acima, temos os coeficientes relacionados às palavras que mais se destacam positivamente (à direita) e negativamente (à esquerda). Analisando as estimativas dos coeficientes positivos, as 6 palavras mais relevantes para explicação da nota do filme foram:  *village, despite, war, french, friendship e falls*. Os 6 maiores coeficientes negativos, por sua vez, são referentes as palavras: *plot, evil, dangerous, deadly, movie e dark*. 
 
 Algumas palavras não tem tantas interpretações, como *movie* que deve ter sido significativa apenas pelo estudo ser baseado em filmes. Em contrapartida, podemos ver que filmes que contem algumas características relacionadas a *vila, guerra, françês e amizade* podem ter uma nota maior, já que essas palavras tem os maiores coeficientes.
 
-Além disso, como observamos os termos *enredo, perigo e morte* são palavras com coeficientes baixos, o que diminui a nota do filme. Talvez isso signifique que um enredo pode ser muito significante para a aprovação do público e que talvez esse público não goste de filmes com *perigo e morte*, como os de terror.
+Além disso, observamos que os termos *enredo, perigo e morte* são palavras com coeficientes baixos, o que diminui a nota do filme. Talvez isso signifique que um enredo pode ser muito significante para a aprovação do público e que talvez esse público não goste de filmes com *perigo e morte*, como os de terror.
 
 ```{r}
 m=length(filmes$vote_average[split=="Teste"])
@@ -263,7 +263,7 @@ ggplot(importancia %>% top_n(n=20),aes(x=reorder(variable,importance),
 
 A partir do gráfico de importância das covariáveis, é possível notar que as variáveis que mais foram importantes para o ajuste se diferem em relação às obtidas pelo estimador linear. Podemos notar que a palavra com maior importância é o artigo definido *the*. Tal fato pode ser justificado por ser um artigo que acompanha substantivos que possam ser utilizados para classificar o filme. Para os demais termos podemos notar pronomes como *his, her, their* além de outras palavras como *and, with, for, from, that*, as quais não há explicações razoáveis para serem importantes à princípio. 
 
-Ainda, podemos identificar que os termos em comum considerados importantes na floresta e no lasso foram *plot, movie, life e story*, isto é, conforme comentado anteriormente, o enredo do filme tem uma importância para a nota atribuida ao filme.
+Ainda, podemos identificar que os termos em comum considerados importantes na floresta e no lasso foram *plot, movie, life e story*, isto é, conforme comentado anteriormente, o enredo do filme tem uma importância para a nota atribuída ao filme.
 
 ```{r}
 m=length(filmes$vote_average[split=="Teste"])
@@ -903,7 +903,7 @@ ggplot(data.frame(predito_redes,observado=filmes$vote_average[split=="Teste"]),
 
 ```
 
-Verificamos se o método realmente estiver adequado aos dados, quando o predito estiver próximo do observado, isto é, os pontos devem estar próximos da reta identidade. Porém, no nosso caso, identificamos que todos os gráficos se encontram com os pontos bem dispersos ao redor da reta, estando alguns mais espalhados (como o KNN), mostrando um comportamento ruim. Os valores do Lasso e das Redes neurais se encontram mais concentrados no centro, enquanto o da Floresta é um dos que se destacam por ter seus pontos mais na parte de cima da reta.
+Verificamos se o método realmente estiver adequado aos dados, quando o predito estiver próximo do observado, isto é, os pontos devem estar próximos da reta identidade. Porém, neste caso, identificamos que todos os gráficos se encontram com os pontos bem dispersos ao redor da reta, estando alguns mais espalhados (como o KNN), mostrando um comportamento ruim. Os valores do Lasso e das Redes neurais se encontram mais concentrados no centro, enquanto o da Floresta é um dos que se destacam por ter seus pontos mais na parte de cima da reta.
 
 ## Item I
 
@@ -927,10 +927,10 @@ riscos_erro %>% knitr::kable(align = "c")
 
 ```
 
-Seguindo as interpretações feitas até o momento a respeito do **risco**, temos que o melhor modelo de acordo com isso é o da Floresta, pois obteve-se o menor risco dentre todos os métodos (1.6477). Isso dá indícios de que as explicações fornecidas até então realmente estavam corretas, a técnica do KNN foi a que teve o maior risco, seguida das redes neurais e do XGBoost. O ajuste realizado com a Floresta obteve um risco bem próximo ao do Lasso (1.6706), indicando assim que o ajuste também é adequando do ponto de vista do **risco**.
+Seguindo as interpretações feitas até o momento a respeito do **risco**, temos que o melhor modelo de acordo este é o da Floresta, pois obteve-se o menor risco dentre todos os métodos (1.6477), fornecendo indícios de que as interpretações feitas até então, estavam corretas. Vale ressaltar que o ajuste realizado com a Floresta obteve um risco bem próximo ao do Lasso (1.6706), com um erro padrão um pouco inferior. 
 
-Como é solicitado no exercício, identificando o método mais adequado para ajuste dos dados filmes pelo **erro padrão** somente, temos que a melhor técnica para os dados é a do KNN, pois seu erro foi o menor obtido (0.1123). Porém, quando se leva em consideração essa medida, outros métodos tiveram resultados semelhantes como o da Floresta (0.1256), XGBoost(0.1279), Redes Neurais (0.1285) e Lasso (0.1289). Como para o risco, o KNN foi o que obteve um risco maior, ele não seria o mais adequado assim, logo os quatro que tiveram erros próximos, podem também serem adequados para o ajuste dos dados filmes.
+A técnica do KNN foi a que teve o maior risco, seguida das redes neurais e do XGBoost.  O motivo do pior desempenho do KNN, nesse exemplo, é que este método não realiza a seleção de covariáveis e muitas dessas não são importante para contribuir com a nota dada aos filmes.
 
 Levando em consideração as **interpretações** com coeficientes e importância, identificamos que no método da Floresta, as palavras de importância são artigos, pronomes ou aquelas que não acrescentam tanto ao ajuste. Quando esse método se compara com o do Lasso e do XGBoost, obtém-se um número maior de palavras que têm verdadeiro impacto no modelo, tornando possível uma pré identificação do gênero do filme em relação a nota atribuída.
 
-Levando os três pontos de vista em consideração, o ajuste mais adequado seria o do Lasso, pois abrange um risco, erro e interpretação adequados em relação aos demais. Caso decidirmos levar somente os dois primeiros pontos em consideração, o modelo mais adequado torna-se o da Floresta. Os outros métodos possuem aspectos bons, mas esses dois são os que mais se destacam.
+Levando em consideração o risco, erro e interpretação do modelo, o ajuste que mais demonstrou ser adequado foi o do Lasso, pois apresentou valores de erro e risco muito próximos ao da Floresta e uma melhor interpretabilidade dos coeficientes em relação aos demais. Caso decidirmos levar somente os dois primeiros pontos em consideração, o modelo mais adequado torna-se o da Floresta. Vale destacar que o XGBoost também apresentou valores próximos destes dois métodos, sendo um erro padrão inferior ao Lasso. Por ser um método não paramétrico, esta técnica é mais flexível e, possivelmente, o ajuste dos tuning parameters dessa função pode levar a um melhor desempenho deste modelo.
