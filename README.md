@@ -1,1 +1,1 @@
-# Disciplina_Minera-o
+# Trabalho da disciplina de mineração de dados
