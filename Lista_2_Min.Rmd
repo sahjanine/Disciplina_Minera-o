@@ -339,7 +339,7 @@ O método de XGBoost apresentou um risco de 1.7003, sendo maior que o do lasso e
 
 ## Item F
 
-Para verificar o comportamento de redes neurais, foi utilizado a técnica na plataforma online Colab, que permitia uma aplicação mais eficiente do método. Com isso, foi definido todos os valores da estrutura dos preditos de redes neurais e nosso interesse é identificar o risco e o erro padrão em comparação com os demais.
+Para verificar o comportamento de redes neurais, foi utilizado a técnica na plataforma online Colab, que permitia uma aplicação mais eficiente do método. Com isso, foram definidos todos os valores da estrutura dos preditos de redes neurais e nosso interesse é identificar o risco e o erro padrão em comparação com os demais.
 
 ```{r, echo=FALSE}
 
@@ -858,7 +858,7 @@ erro_padrao_redes
 
 ```
 
-Observa-se que o risco de redes neurais, não é o melhor para os dados em relação aos outros métodos. Ele é bem semelhante ao resultado obtido pelo KNN e seu erro padrãos também é maior em relação aos demais (sendo um pouco menor que o do Lasso).
+Observa-se que o risco de redes neurais, não é o melhor para os dados em relação aos outros métodos. Ele é bem semelhante ao resultado obtido pelo KNN e seu erro padrão também é maior em relação aos demais (sendo um pouco menor que o do Lasso).
 
 ## Item H
 
@@ -903,7 +903,7 @@ ggplot(data.frame(predito_redes,observado=filmes$vote_average[split=="Teste"]),
 
 ```
 
-Verificamos se o método realmente estiver adequado aos dados, quando o predito estiver próximo do observado, isto é, os pontos devem estar próximos da reta identidade. Porém, neste caso, identificamos que todos os gráficos se encontram com os pontos bem dispersos ao redor da reta, estando alguns mais espalhados (como o KNN), mostrando um comportamento ruim. Os valores do Lasso e das Redes neurais se encontram mais concentrados no centro, enquanto o da Floresta é um dos que se destacam por ter seus pontos mais na parte de cima da reta.
+Verificamos se o método realmente está adequado aos dados, quando o valor predito estiver próximo do observado, isto é, os pontos devem estar próximos da reta identidade. Porém, neste caso, identificamos que todos os gráficos se encontram com os pontos bem dispersos ao redor da reta, estando alguns mais espalhados (como o KNN), mostrando um comportamento ruim. Os valores do Lasso e das Redes neurais se encontram mais concentrados no centro, enquanto o da Floresta é um dos que se destacam por ter seus pontos mais na parte de cima da reta.
 
 ## Item I
 
@@ -927,7 +927,7 @@ riscos_erro %>% knitr::kable(align = "c")
 
 ```
 
-Seguindo as interpretações feitas até o momento a respeito do **risco**, temos que o melhor modelo de acordo este é o da Floresta, pois obteve-se o menor risco dentre todos os métodos (1.6477), fornecendo indícios de que as interpretações feitas até então, estavam corretas. Vale ressaltar que o ajuste realizado com a Floresta obteve um risco bem próximo ao do Lasso (1.6706), com um erro padrão um pouco inferior. 
+Seguindo as interpretações feitas até o momento a respeito do **risco**, temos que o melhor modelo é o da Floresta Aleatória, pois obteve-se o menor risco dentre todos os métodos (1.6477), fornecendo indícios de que as interpretações feitas até então, estavam corretas. Vale ressaltar que o ajuste realizado com a Floresta obteve um risco bem próximo ao do Lasso (1.6706), com um erro padrão um pouco inferior. 
 
 A técnica do KNN foi a que teve o maior risco, seguida das redes neurais e do XGBoost.  O motivo do pior desempenho do KNN, nesse exemplo, é que este método não realiza a seleção de covariáveis e muitas dessas não são importante para contribuir com a nota dada aos filmes.
 
